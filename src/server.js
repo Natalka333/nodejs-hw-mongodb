@@ -10,9 +10,9 @@ const PORT = Number(env('PORT', 3000));
 
 export const setupServer = () => {
     const app = express();
-    app.use(cors());
 
     app.use(express.json());
+    app.use(cors());
 
     app.use(
         pino({
@@ -33,7 +33,7 @@ export const setupServer = () => {
     });
 
 
-    app.get('/contacts/:ObjectId', async (req, res) => {
+    app.get('/contacts/:contactId', async (req, res) => {
         const { contactId } = req.params;
         const contact = await getContactsById(contactId);
 
