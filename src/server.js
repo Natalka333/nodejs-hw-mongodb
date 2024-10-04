@@ -37,7 +37,7 @@ export const setupServer = () => {
         const { contactId } = req.params;
         const contact = await getContactsById(contactId);
 
-        if (!contactId) {
+        if (!contact) {
             return res.status(404).json({
                 message: 'Contact not found',
                 data: null,
