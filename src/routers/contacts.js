@@ -12,7 +12,7 @@ router.get('/contacts', ctrlWrapper(getContactsController));
 router.get('/contacts/:contactId', isValidId, ctrlWrapper(getContactByIdController));
 router.post('/contacts', validateBody(createContactSchema), ctrlWrapper(addNewContactController));
 router.delete('/contacts/:contactId', isValidId, ctrlWrapper(deleteContactController));
-router.patch('/contacts/:contactId', isValidId, ctrlWrapper(patchContactController));
+router.patch('/contacts/:contactId', validateBody(createContactSchema), isValidId, ctrlWrapper(patchContactController));
 
 // router.put('/contact/:contactId', ctrlWrapper(upsertContactController));
 
