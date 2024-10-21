@@ -8,7 +8,7 @@ export const validateBody = (schema) => async (req, res, next) => {
         const simplifiedErrors = err.details.map((e) => e.message);
 
         const error = createHttpError(400, 'Bad Request', {
-            errors: simplifiedErrors, // Передаем только сообщения
+            errors: simplifiedErrors,
         });
 
         next(error);
