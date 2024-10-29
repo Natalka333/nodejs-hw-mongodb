@@ -1,40 +1,40 @@
-import createHttpError from 'http-errors';
+// import createHttpError from 'http-errors';
 
-import { ContactsCollection } from '../db/models/contacts.js';
-import { ROLES } from '../constants/index.js';
+// import { ContactsCollection } from '../db/models/contacts.js';
+// import { ROLES } from '../constants/index.js';
 
-export const checkRoles = (...roles) => {
-    return async (req, res, next) => {
-        const { user } = req;
+// export const checkRoles = (...roles) => {
+//     return async (req, res, next) => {
+//         const { user } = req;
 
-        if (!user) {
-            next(createHttpError(401, 'Unauthorized'));
-            return;
-        }
+//         if (!user) {
+//             next(createHttpError(401, 'Unauthorized'));
+//             return;
+//         }
 
-        const { role } = user;
+//         const { role } = user;
 
-        if (roles.includes(ROLES.USER) && role === ROLES.USER) {
-            next();
-            return;
-        }
-        const { contactId } = req.params;
-        if (!contactId) {
-            next(createHttpError(403));
-            return;
-        }
+//         if (roles.includes(ROLES.USER) && role === ROLES.USER) {
+//             next();
+//             return;
+//         }
+//         const { contactId } = req.params;
+//         if (!contactId) {
+//             next(createHttpError(403));
+//             return;
+//         }
 
-        const contact = await ContactsCollection.findOne({
-            _id: contactId,
-            userId: user._id,
+//         const contact = await ContactsCollection.findOne({
+//             _id: contactId,
+//             userId: user._id,
 
-        });
+//         });
 
-        if (contact) {
-            next();
-            return;
-        }
-        next(createHttpError(403, 'Access denied'));
-    }
+//         if (contact) {
+//             next();
+//             return;
+//         }
+//         next(createHttpError(403, 'Access denied'));
+//     }
 
-}
+// }
