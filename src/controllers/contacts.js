@@ -62,8 +62,13 @@ export const getContactByIdController = async (req, res, next) => {
 
 
 export const addNewContactController = async (req, res, next) => {
+    console.log('User in request:', req.user);
+
     const { _id: userId } = req.user;
     const contactData = { ...req.body, userId };
+
+    console.log('Contact Data:', contactData);
+
     const contact = await addNewContact(contactData);
 
     res.status(201).json({
