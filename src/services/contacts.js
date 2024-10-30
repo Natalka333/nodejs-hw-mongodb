@@ -52,7 +52,7 @@ export const getAllContacts = async ({
 
 
 export const getContactsById = async (userId, contactId) => {
-    const contacts = await ContactsCollection.findById({ _id: contactId, userId });
+    const contacts = await ContactsCollection.findOne({ _id: contactId, userId });
     return contacts;
 };
 
