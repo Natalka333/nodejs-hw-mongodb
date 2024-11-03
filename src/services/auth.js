@@ -115,6 +115,7 @@ export const requestResetToken = async (email) => {
     const user = await UsersCollection.findOne({ email });
 
     if (!user) {
+        console.log("User not found");
         throw createHttpError(404, 'User not found');
     }
 
