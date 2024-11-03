@@ -165,7 +165,9 @@ export const resetPassword = async (payload) => {
     let entries;
 
     try {
+        console.log("Verifying token:", payload.token);
         entries = jwt.verify(payload.token, env('JWT_SECRET'));
+        console.log("Token verified:", entries);
     } catch (err) {
         if (err instanceof Error) throw createHttpError(401, 'Token is expired or invalid.');
         throw err;
@@ -181,6 +183,7 @@ export const resetPassword = async (payload) => {
     }
 
     const encryptedPassword = await bcrypt.hash(payload.password, 10);
+    console.log("Password encrypted, updating user...");
 
     await UsersCollection.updateOne(
         { _id: user._id },
