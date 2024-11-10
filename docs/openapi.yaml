@@ -15,7 +15,9 @@ tags:
     description: Auth operations.
 servers:
   - url: http://localhost:3000
-  - url: #посилання на задеплоєний сайт
+    description: Local development server
+  - url: http://your-deployment-url.com
+    description: Production server on Render
 paths:
   # тут будуть посилання на ендпоінти
   /contacts:
@@ -24,6 +26,10 @@ paths:
     post: 
       $ref: ../swagger/paths/contacts/post.yaml
   /contacts/{id}:
+    delete:
+      $ref: ../swagger/paths/contacts/{id}/delete.yaml
+    patch:
+      $ref: ../swagger/paths/contacts/{id}/patch.yaml
     get:
       $ref: ../swagger/paths/contacts/{id}/get.yaml
 components:

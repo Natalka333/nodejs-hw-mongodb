@@ -11,10 +11,12 @@
   },
   "servers": [
     {
-      "url": "http://localhost:3000"
+      "url": "http://localhost:3000",
+      "description": "Local development server"
     },
     {
-      "url": null
+      "url": "http://your-deployment-url.com",
+      "description": "Production server on Render"
     }
   ],
   "tags": [
@@ -145,11 +147,11 @@
                         },
                         "totalItems": {
                           "type": "number",
-                          "example": 50
+                          "example": 30
                         },
                         "totalPages": {
                           "type": "number",
-                          "example": 5
+                          "example": 3
                         },
                         "hasNextPage": {
                           "type": "boolean",
@@ -189,22 +191,15 @@
               "schema": {
                 "type": "object",
                 "required": [
-                  "_id",
                   "name",
                   "phoneNumber",
-                  "contactType",
-                  "userId"
+                  "contactType"
                 ],
                 "properties": {
-                  "_id": {
-                    "description": "Contact's id",
-                    "type": "string",
-                    "example": "66fc0886a718170456efe580"
-                  },
                   "name": {
                     "description": "Contact's name",
                     "type": "string",
-                    "example": "John Doe"
+                    "example": "Alice Doe"
                   },
                   "phoneNumber": {
                     "description": "Contact's phone number",
@@ -230,11 +225,6 @@
                       "personal"
                     ],
                     "example": "home"
-                  },
-                  "userId": {
-                    "description": "Contact's user id",
-                    "type": "string",
-                    "example": "672799a1ea1e0ee61f8cac29"
                   },
                   "photo": {
                     "description": "Contact's photo",
@@ -283,6 +273,153 @@
       }
     },
     "/contacts/{id}": {
+      "delete": {
+        "tags": [
+          "Contacts"
+        ],
+        "summary": "Delete contact",
+        "operationId": "deleteContact",
+        "description": "Delete contact by id",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "schema": {
+              "type": "string"
+            },
+            "required": true,
+            "description": "Delete contact by id"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Contact  successfully deleted",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "integer",
+                      "example": 200
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "Successfully deleted the contact!"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/401"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "Contacts"
+        ],
+        "summary": "Update contact",
+        "operationId": "patchContact",
+        "description": "Update contact by id",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "schema": {
+              "type": "string"
+            },
+            "required": true,
+            "description": "Update contact by id"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string",
+                    "description": "Update contact's name",
+                    "example": "Alice Doe"
+                  },
+                  "phoneNumber": {
+                    "type": "string",
+                    "description": "Update contact's phone number",
+                    "example": "380999678900"
+                  },
+                  "email": {
+                    "type": "string",
+                    "description": "Update contact's email",
+                    "example": "alice555@example.com"
+                  },
+                  "isFavourite": {
+                    "description": "Contact is favorite or no",
+                    "type": "boolean",
+                    "example": true
+                  },
+                  "contactType": {
+                    "type": "string",
+                    "enum": [
+                      "work",
+                      "home",
+                      "personal"
+                    ],
+                    "description": "Update contact type",
+                    "example": "work"
+                  },
+                  "photo": {
+                    "type": "string",
+                    "format": "binary",
+                    "description": "Update contact's photo"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Contact updated successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "integer",
+                      "example": 200
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "Successfully patched the contact!"
+                    },
+                    "data": {
+                      "$ref": "#/components/schemas/contact"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/401"
+          }
+        }
+      },
       "get": {
         "tags": [
           "Contacts"

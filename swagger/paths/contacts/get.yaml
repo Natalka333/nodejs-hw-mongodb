@@ -80,10 +80,10 @@ responses:
                   example: 10
                 totalItems:
                   type: number
-                  example: 50
+                  example: 30
                 totalPages:
                   type: number
-                  example: 5
+                  example: 3
                 hasNextPage:
                   type: boolean
                   example: false
@@ -91,5 +91,6 @@ responses:
                   type: boolean
                   example: true
   '401':
-    $ref: '../../components/responses/401.yaml'
-
+    $ref: ../../components/responses/401.yaml
+  # '500':
+  #   $ref: ../../components/responses/500.yaml
