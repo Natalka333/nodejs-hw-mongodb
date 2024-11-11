@@ -16,7 +16,7 @@ tags:
 servers:
   - url: http://localhost:3000
     description: Local development server
-  - url: http://your-deployment-url.com
+  - url: https://nodejs-hw-mongodb-13-tos8.onrender.com
     description: Production server on Render
 paths:
   # тут будуть посилання на ендпоінти
