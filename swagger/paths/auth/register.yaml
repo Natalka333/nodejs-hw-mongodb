@@ -1,4 +1,4 @@
-post:
+
   tags:
     - Auth
   summary: Register a new user
@@ -16,10 +16,10 @@ post:
               example: 'Alice Doe'
             email:
               type: string
-              example: 'user@example.com'
+              example: 'alice555@example.com'
             password:
               type: string
-              example: 'password123'
+              example: 'qweqwe123'
   responses:
     '201':
       description: Successfully registered a user
@@ -27,6 +27,10 @@ post:
         application/json:
           schema:
             type: object
+            required:
+            - status
+            - message
+            - data
             properties:
               status:
                 type: integer

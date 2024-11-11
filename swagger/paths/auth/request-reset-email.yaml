@@ -1,4 +1,4 @@
-post:
+
   tags:
     - Auth
   summary: Request password reset email

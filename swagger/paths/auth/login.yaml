@@ -1,4 +1,4 @@
-post:
+
   tags:
     - Auth
   summary: User login
@@ -24,6 +24,10 @@ post:
         application/json:
           schema:
             type: object
+            required:
+              - status
+              - message
+              - data
             properties:
               status:
                 type: integer
